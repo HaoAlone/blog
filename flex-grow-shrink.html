@@ -136,7 +136,12 @@
     }
     function trans(str){
         // return str
-        return Number(str.split('px')[0]).toFixed(2) + 'px'
+        if(str.split('.').length>2){
+            if(str.split('.')[1].length>2){
+                return Number(str.split('px')[0]).toFixed(2) + 'px'
+            }
+        }
+        return str
     }
     window.onload = function(){
         getWidth('flex-shrink-gt');
