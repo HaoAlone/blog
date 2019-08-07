@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>flex grow shrink</title>
+</head>
+<style>
+    *{
+        /*margin: 0;*/
+        padding: 0;
+        box-sizing: border-box!important;
+    }
+    .container {
+        width: 500px;
+        display: flex;
+        height: 300px;
+        background: aqua;
+    }
+
+    .container span {
+        display: inline-block;
+        height: 200px;
+        font-size: 32px;
+    }
+    /*
+        flex-grow
+    */
+    .flex-grow-gt .one {
+        width: 100px;
+        flex-grow: 1;
+        background: green;
+    }
+
+    .flex-grow-gt .two {
+        width: 150px;
+        flex-grow: 2;
+        background: blue
+    }
+
+    .flex-grow-gt .three {
+        width: 200px;
+        flex-grow: 2;
+        background: red
+    }
+
+    .flex-grow-lt .one {
+        width: 100px;
+        flex-grow: 0.1;
+        background: green;
+    }
+
+    .flex-grow-lt .two {
+        width: 150px;
+        flex-grow: 0.2;
+        background: blue
+    }
+
+    .flex-grow-lt .three {
+        width: 200px;
+        flex-grow: 0.2;
+        background: red
+    }
+    /*
+        flex-shrink
+    */
+    .flex-shrink-gt .one {
+        width: 100px;
+        min-width: 10px;
+        /*
+           缩放有最小值 (最长单词 或 固定大小元素)
+        */
+        flex-shrink: 3;
+        background: green;
+    }
+
+    .flex-shrink-gt .two {
+        width: 250px;
+        flex-shrink: 2;
+        background: blue
+    }
+
+    .flex-shrink-gt .three {
+        width: 400px;
+        flex-shrink: 3;
+        background: red
+    }
+
+    .flex-shrink-lt .one {
+        width: 100px;
+        flex-shrink: 0.3;
+        background: green;
+    }
+
+    .flex-shrink-lt .two {
+        width: 250px;
+        flex-shrink: 0.2;
+        background: blue
+    }
+
+    .flex-shrink-lt .three {
+        width: 400px;
+        flex-shrink: 0.3;
+        background: red
+    }
+</style>
+<body>
+<h2>flex-grow>1</h2>
+<div class="container flex-grow-gt">
+    <span class="one"></span>
+    <span class="two"></span>
+    <span class="three"></span>
+</div><h2>flex-grow<1</h2>
+<div class="container flex-grow-lt">
+    <span class="one"></span>
+    <span class="two"></span>
+    <span class="three"></span>
+</div>
+<h2>flex-shrink>1</h2>
+<div class="container flex-shrink-gt">
+    <span class="one"></span>
+    <span class="two"></span>
+    <span class="three"></span>
+</div>
+<h2>flex-shrink<1</h2>
+<div class="container flex-shrink-lt">
+    <span class="one"></span>
+    <span class="two"></span>
+    <span class="three"></span>
+</div>
+<script>
+    function getWidth(classname) {
+        let node = document.querySelector(`.${classname}`).children;
+        node[0].innerText = trans(window.getComputedStyle(node[0]).width);
+        node[1].innerText = trans(window.getComputedStyle(node[1]).width);
+        node[2].innerText = trans(window.getComputedStyle(node[2]).width);
+    }
+    function trans(str){
+        // return str
+        return Number(str.split('px')[0]).toFixed(2) + 'px'
+    }
+    window.onload = function(){
+        getWidth('flex-shrink-gt');
+        getWidth('flex-shrink-lt');
+        getWidth('flex-grow-gt');
+        getWidth('flex-grow-lt');
+    };
+    setInterval(function () {
+        getWidth('flex-shrink-gt');
+        getWidth('flex-shrink-lt');
+        getWidth('flex-grow-gt');
+        getWidth('flex-grow-lt');
+    },1000)
+
+</script>
+</body>
+</html>
